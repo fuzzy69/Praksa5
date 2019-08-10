@@ -1,0 +1,5 @@
+﻿CREATE TABLE dbo.MESTO (
+	Sifra_Mesto int NOT NULL,
+	Naziv_Mesto nvarchar(100) NOT NULL
+	CONSTRAINT PK_MESTO PRIMARY KEY CLUSTERED (Sifra_Mesto ASC)
+)

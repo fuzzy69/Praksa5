@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Praksa5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MESTO">
+          <Key>
+            <PropertyRef Name="Sifra_Mesto" />
+          </Key>
+          <Property Name="Sifra_Mesto" Type="int" Nullable="false" />
+          <Property Name="Naziv_Mesto" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZAPOSLENI">
+          <Key>
+            <PropertyRef Name="Maticni_Broj_Zaposlenog" />
+          </Key>
+          <Property Name="Maticni_Broj_Zaposlenog" Type="bigint" Nullable="false" />
+          <Property Name="Prezime_Zaposlenog" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ime_Zaposlenog" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ime_Jednog_Roditelja" Type="nvarchar" MaxLength="100" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="255" />
+          <Property Name="Sifra_Mesto" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Function Name="sp_delete_zaposleni" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Maticni_Broj" Type="bigint" Mode="In" />
+        </Function>
+        <EntityContainer Name="Praksa5ModelStoreContainer">
+          <EntitySet Name="MESTO" EntityType="Self.MESTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZAPOSLENI" EntityType="Self.ZAPOSLENI" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Praksa5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MESTO">
+          <Key>
+            <PropertyRef Name="Sifra_Mesto" />
+          </Key>
+          <Property Name="Sifra_Mesto" Type="Int32" Nullable="false" />
+          <Property Name="Naziv_Mesto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZAPOSLENI">
+          <Key>
+            <PropertyRef Name="Maticni_Broj_Zaposlenog" />
+          </Key>
+          <Property Name="Maticni_Broj_Zaposlenog" Type="Int64" Nullable="false" />
+          <Property Name="Prezime_Zaposlenog" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ime_Zaposlenog" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ime_Jednog_Roditelja" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Adresa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Sifra_Mesto" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="Praksa5Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MESTO" EntityType="Self.MESTO" />
+          <EntitySet Name="ZAPOSLENI" EntityType="Self.ZAPOSLENI" />
+          <FunctionImport Name="sp_delete_zaposleni">
+            <Parameter Name="Maticni_Broj" Mode="In" Type="Int64" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Praksa5ModelStoreContainer" CdmEntityContainer="Praksa5Entities">
+          <EntitySetMapping Name="MESTO">
+            <EntityTypeMapping TypeName="Praksa5Model.MESTO">
+              <MappingFragment StoreEntitySet="MESTO">
+                <ScalarProperty Name="Sifra_Mesto" ColumnName="Sifra_Mesto" />
+                <ScalarProperty Name="Naziv_Mesto" ColumnName="Naziv_Mesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZAPOSLENI">
+            <EntityTypeMapping TypeName="Praksa5Model.ZAPOSLENI">
+              <MappingFragment StoreEntitySet="ZAPOSLENI">
+                <ScalarProperty Name="Maticni_Broj_Zaposlenog" ColumnName="Maticni_Broj_Zaposlenog" />
+                <ScalarProperty Name="Prezime_Zaposlenog" ColumnName="Prezime_Zaposlenog" />
+                <ScalarProperty Name="Ime_Zaposlenog" ColumnName="Ime_Zaposlenog" />
+                <ScalarProperty Name="Ime_Jednog_Roditelja" ColumnName="Ime_Jednog_Roditelja" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Sifra_Mesto" ColumnName="Sifra_Mesto" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_delete_zaposleni" FunctionName="Praksa5Model.Store.sp_delete_zaposleni" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
